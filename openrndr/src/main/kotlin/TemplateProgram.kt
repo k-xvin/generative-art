@@ -1,8 +1,6 @@
 import org.openrndr.application
 import org.openrndr.color.ColorRGBa
 import org.openrndr.draw.*
-import org.openrndr.ffmpeg.ScreenRecorder
-import org.openrndr.ffmpeg.VideoWriter
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -16,7 +14,7 @@ fun main() = application {
         val image = loadImage("data/images/pm5544.png")
         val font = loadFont("data/fonts/default.otf", 64.0)
 
-        extend(ScreenRecorder())
+//        extend(ScreenRecorder())
         extend {
             drawer.drawStyle.colorMatrix = tint(ColorRGBa.WHITE.shade(0.2))
             drawer.image(image)
