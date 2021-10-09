@@ -4,6 +4,7 @@ import org.openrndr.application
 import org.openrndr.color.ColorRGBa
 import org.openrndr.extensions.Screenshots
 import org.openrndr.math.Vector2
+import org.openrndr.math.Vector3
 import org.openrndr.shape.Circle
 
 fun main() = application {
@@ -14,7 +15,7 @@ fun main() = application {
 
     program {
 //      val circleColor = ColorRGBa.WHITE;
-        val circleColor = ColorRGBa.PINK;
+        val circleColor = (ColorRGBa.PINK).opacify(0.90);
 
         val circles = List(5000) {
             val x = Math.random() * width
@@ -26,19 +27,22 @@ fun main() = application {
             )
         }
 
-        extend(Screenshots())
+//        extend(Screenshots())
         extend {
 //          drawer.clear(ColorRGBa.PINK)
             drawer.clear(ColorRGBa.WHITE)
 
             drawer.stroke = null;
 
-            drawer.circles(circles);
+//            drawer.circles(circles);
 
+//            drawer.translate(width/2.0, height/2.0)
+//            drawer.rotate(seconds * 10.0)
             for ((index, circle) in circles.withIndex()) {
                 drawer.fill = circleColor.shade(index.toDouble() / circles.size)
                 drawer.circle(circle)
             }
+
 
 //            drawer.fill = null
 //            drawer.circle(400.0,400.0, 50.0)
