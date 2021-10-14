@@ -5,8 +5,8 @@ import org.openrndr.color.ColorRGBa
 import org.openrndr.draw.Drawer
 import org.openrndr.draw.LineCap
 import org.openrndr.math.Vector2
+import kotlin.math.PI
 import kotlin.math.atan2
-import kotlin.math.cos
 import kotlin.math.sin
 
 fun main() = application {
@@ -24,12 +24,12 @@ fun main() = application {
             drawer.translate(width / 2.0, height / 2.0)
             drawer.clear(ColorRGBa.WHITE)
 
-            drawer.strokeWeight = 5.0;
-            drawer.stroke = palette[3];
-            drawer.lineCap = LineCap.ROUND;
+            drawer.strokeWeight = 5.0
+            drawer.stroke = palette[3]
+            drawer.lineCap = LineCap.ROUND
             drawer.sineWave(
-                Vector2(0.0, 0.0),
-                Vector2(400.0, -200.0),
+                Vector2(0.0, 100.0),
+                Vector2(300.0, -300.0),
                 500,
                 SineWave(0.04, 0.0, 20.0)
             );
@@ -42,23 +42,26 @@ fun main() = application {
 fun Drawer.sineWave(start: Vector2, end: Vector2, numPoints: Int, sineWave: SineWave) {
     this.lineSegment(start, end);
 
-    val distance = start.distanceTo(end);
-    val step = distance / numPoints;
+    val distance = start.distanceTo(end)
+    val step = distance / numPoints
 
-    val angle = atan2(end.y,end.x);
+    // need angle of vector start to end
+    // to get vector start to end:
+    // figure out
+    val angleInDegrees = (atan2(end.y, end.x) * 180) / PI
 
     val points = List(numPoints) { t ->
-        val movedStartX = step * t + start.x;
-        val movedStartY = sineWave.amp * sin(sineWave.freq*t.toDouble()) + start.y;
-
-        val rotatedX = 0.0;
-        val rotatedY = 0.0;
-        Vector2(rotatedX, rotatedY);
+        val movedStartX = start.x + (step * t)
+        val movedStartY = start.y +( sineWave.amp * sin(sineWave.freq * t.toDouble()))
+        Vector2(movedStartX, movedStartY).rotate(angleInDegrees, start)
     }
+    println(angleInDegrees)
+    println(points.last())
+    println(end);
 
 
 
-    this.lineStrip(points);
+    this.lineStrip(points)
 }
 
 data class SineWave(val freq: Double, val shift: Double, val amp: Double) {
