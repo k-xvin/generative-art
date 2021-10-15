@@ -7,6 +7,7 @@ import org.openrndr.draw.loadFont
 import org.openrndr.draw.loadImage
 import org.openrndr.draw.tint
 import org.openrndr.math.Vector2
+import java.util.*
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -17,28 +18,32 @@ fun main() = application {
     }
 
     program {
-        drawer.clear(ColorRGBa.WHITE)
         extend {
-            drawer.strokeWeight = 1.0
+            drawer.clear(ColorRGBa.WHITE)
+            drawer.strokeWeight = 10.0
             drawer.stroke = ColorRGBa.BLACK
-            drawer.branch(100.0)
-            drawer.lineSegment(
-                0.0,
-                0.0,
-                0.0,
-                100.0
-            )
+            drawer.fill = null
+            drawer.circle(400.0, 400.0, 40.0)
+            drawer.branch(Vector2(400.0, 400.0), 100.0)
         }
     }
 }
 
-fun Drawer.branch(length: Double) {
+fun Drawer.branch(start: Vector2, length: Double) {
+    if(length < 40.0) return
+
+//    val end = Vector2(0.0, start.y - length)
+//    this.pushTransforms()
+    this.translate(start)
+    this.circle(0.0,0.0, 20.0)
     this.lineSegment(
-        0.0,
-        0.0,
-        0.0,
-        length
+        Vector2(0.0,0.0),
+        Vector2(0.0, -length)
     )
-    this.pushTransforms()
-    this.popTransforms()
+//    this.popTransforms()
+
+//    this.pushTransforms()
+//    this.rotate(-10.0)
+    this.branch(Vector2(0.0,-length/2.0), length/2.0)
+//    this.popTransforms()
 }
