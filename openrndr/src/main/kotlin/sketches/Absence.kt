@@ -7,7 +7,9 @@ import org.openrndr.extra.noise.perlin
 import org.openrndr.extra.noise.perlinLinear
 import org.openrndr.extra.noise.random
 import org.openrndr.extra.noise.simplex
+import org.openrndr.extra.videoprofiles.ProresProfile
 import org.openrndr.ffmpeg.ScreenRecorder
+import org.openrndr.ffmpeg.VideoWriter
 import org.openrndr.math.Polar
 import org.openrndr.math.Vector2
 import org.openrndr.shape.Circle
@@ -27,7 +29,12 @@ fun main() = application {
         val bone = ColorRGBa.fromHex("e3dac9")
         val red = ColorRGBa.fromHex("C33149")
 
-//        extend(ScreenRecorder())
+        extend(ScreenRecorder()){
+            profile = ProresProfile().apply {
+                profile = ProresProfile.Profile.HQ4444
+                codec = "prores_ks"
+            }
+        }
         extend {
             drawer.clear(red)
             drawer.fill = null

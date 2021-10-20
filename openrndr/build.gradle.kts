@@ -55,7 +55,7 @@ val orxFeatures = setOf(
 //  "orx-time-operators",
 //  "orx-timer",
 //  "orx-triangulation",
-//  "orx-video-profiles",
+  "orx-video-profiles",
     null
 ).filterNotNull()
 
