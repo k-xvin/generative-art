@@ -1,5 +1,6 @@
 package sketches
 
+import org.openrndr.Fullscreen
 import org.openrndr.application
 import org.openrndr.color.ColorRGBa
 import org.openrndr.draw.*
@@ -20,8 +21,11 @@ import kotlin.math.sin
 
 fun main() = application {
     configure {
-        width = 800
-        height = 800
+//        width = 800
+//        height = 800
+        width = 1920
+        height = 1080
+        fullscreen = Fullscreen.SET_DISPLAY_MODE
     }
 
     program {
