@@ -16,6 +16,7 @@ import org.openrndr.shape.contour
 import kotlin.math.cos
 import kotlin.math.sin
 
+// sketch3 10/23/2021
 fun main() = application {
     configure {
         width = 800
