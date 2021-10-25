@@ -17,7 +17,7 @@ fun main() = application {
 
     program {
 
-        val points = List(7) {
+        val points = List(5) {
             val x = random(0.0, width.toDouble())
             val y = random(0.0, height.toDouble())
             Vector2(x, y)
@@ -32,13 +32,16 @@ fun main() = application {
 
             // need to check closest DISTANCE
             for (i in 0..sortedByX.size-2) {
-                drawer.lineSegment(sortedByX[i],sortedByX[i+1])
+                val closestPoints = getClosestPoints(sortedByX[i], sortedByX)
+//                drawer.lineSegment(sortedByX[i],sortedByX[i+1])
+                drawer.lineSegment(closestPoints[i],closestPoints[i+1])
+
 //                drawer.lineSegment(sortedByY[i],sortedByY[i+1])
 
-                if(i < sortedByX.size-2){
-                    drawer.lineSegment(sortedByX[i],sortedByX[i+2])
-//                    drawer.lineSegment(sortedByY[i],sortedByY[i+2])
-                }
+//                if(i < sortedByX.size-2){
+//                    drawer.lineSegment(closestPoints[i],closestPoints[i+2])
+////                    drawer.lineSegment(sortedByY[i],sortedByY[i+2])
+//                }
             }
 
 
@@ -51,6 +54,13 @@ fun main() = application {
 }
 
 // Get a list of the points to point, sorted by distance
-fun getClosestPoints(point: Vector2, points: List<Vector2>) : List<Vector2> {
+fun getClosestPoints(point: Vector2, points: List<Vector2>) : List<Vector2>{
+    // maps distance to the point
+    val pointDistanceMap = points.associateBy { point.distanceTo(it) }
 
+    // sorts map by distance ascending
+    val closestPoints = pointDistanceMap.toSortedMap()
+
+    println(closestPoints)
+    return closestPoints.values.toList()
 }
