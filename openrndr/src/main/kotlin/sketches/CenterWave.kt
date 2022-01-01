@@ -2,6 +2,7 @@ package sketches
 
 import org.openrndr.*
 import org.openrndr.color.ColorRGBa
+import org.openrndr.extensions.Screenshots
 import org.openrndr.extra.noise.simplex
 import org.openrndr.extra.videoprofiles.ProresProfile
 import org.openrndr.ffmpeg.ScreenRecorder
@@ -16,14 +17,15 @@ fun main() = application {
         fullscreen = Fullscreen.SET_DISPLAY_MODE
     }
     program {
+    extend(Screenshots())
 //        oliveProgram {
 
-        extend(ScreenRecorder()){
-            profile = ProresProfile().apply {
-                profile = ProresProfile.Profile.HQ4444
-                codec = "prores_ks"
-            }
-        }
+//        extend(ScreenRecorder()){
+//            profile = ProresProfile().apply {
+//                profile = ProresProfile.Profile.HQ4444
+//                codec = "prores_ks"
+//            }
+//        }
 
         val spacecadet = ColorRGBa.fromHex("2E2D4D")
         val grullo = ColorRGBa.fromHex("A99F96")
