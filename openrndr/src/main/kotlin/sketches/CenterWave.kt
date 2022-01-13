@@ -17,15 +17,17 @@ fun main() = application {
         fullscreen = Fullscreen.SET_DISPLAY_MODE
     }
     program {
-    extend(Screenshots())
+//    extend(Screenshots())
 //        oliveProgram {
 
-//        extend(ScreenRecorder()){
+        extend(ScreenRecorder()){
 //            profile = ProresProfile().apply {
 //                profile = ProresProfile.Profile.HQ4444
 //                codec = "prores_ks"
 //            }
-//        }
+            maximumDuration = 180.0
+            quitAfterMaximum = true
+        }
 
         val spacecadet = ColorRGBa.fromHex("2E2D4D")
         val grullo = ColorRGBa.fromHex("A99F96")
@@ -33,10 +35,10 @@ fun main() = application {
 
 
         //var radius = 80.0
-        var radius = 10.0;
+        var radius = 20.0 //10.0;
 //        val amp = radius
 //        var step = 0.003
-        var step = -0.004
+        var step = -0.006//-0.004
 
         keyboard.keyDown.listen {
             // -- it refers to a KeyEvent instance here
@@ -56,6 +58,9 @@ fun main() = application {
             if (it.key == KEY_ARROW_LEFT) {
                 radius -= 5.0
                 println(radius)
+            }
+            if (it.key == KEY_ESCAPE) {
+                application.exit()
             }
         }
 
